@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="menu__wrapper">
+            <div class="logo__wrapper">
+                <h1>Welcome, {{ user.username }}</h1>
+            </div>
+            <div class="action-buttons">
+                <button class="action-button" onclick="window.location.href='{% url 'logout' %}'; return false;">
+                    Logout
+                </button>
+            </div>
+        </nav>
+
+        <div class="login-history">
+            <h2>Login History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Login Time</th>
+                        <th>IP Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in login_logs %}
+                    <tr>
+                        <td>{{ log.login_time }}</td>
+                        <td>{{ log.ip_address }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
